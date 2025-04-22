@@ -16,20 +16,24 @@ void setup() {
   Serial.begin(9600);
 
   wifiConnect();
+  
   mqttSetup();  
+  mqttConnect();
 }
 
 void loop() {
+  
+  mqttLoop();
+
   if (!isWifiConnected()) {
     Serial.println("Wi-Fi disconnected, reconnecting...");
     wifiConnect();
   }
 
   if (!isMqttConnected()) {
+    Serial.println("MQTT disconnected, reconnecting...");
     mqttConnect();
   }
-
-  mqttLoop();
 
   unsigned long now = millis();
   
@@ -40,10 +44,8 @@ void loop() {
 }
 
 void checkSensor(unsigned long now){
-    
-  bool raining = isRaining();
 
-  if (raining && (now - lastSent > MESSAGE_INTERVAL)) {
+  if (isRaining() && (now - lastSent > MESSAGE_INTERVAL)) {
     publishMessage("Rain detected!");
     lastSent = now;
   }

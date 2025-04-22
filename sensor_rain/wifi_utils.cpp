@@ -21,8 +21,5 @@ void wifiConnect() {
 }
 
 bool isWifiConnected() {
-  if (WiFi.status() != WL_CONNECTED) {
-    return false;
-  }
-  return true;
+  return WiFi.status() == WL_CONNECTED;
 }
