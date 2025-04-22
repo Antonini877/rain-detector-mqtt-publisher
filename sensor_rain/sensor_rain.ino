@@ -8,7 +8,6 @@
 void checkSensor(unsigned long now);
 bool isRaining();
 
-bool lastRainStatus = false;
 unsigned long lastCheck = 0;
 unsigned long lastSent = 0;
 
@@ -44,12 +43,11 @@ void checkSensor(unsigned long now){
     
   bool raining = isRaining();
 
-  if (raining && (!lastRainStatus || now - lastSent > MESSAGE_INTERVAL)) {
+  if (raining && (now - lastSent > MESSAGE_INTERVAL)) {
     publishMessage("Rain detected!");
     lastSent = now;
   }
 
-  lastRainStatus = raining;
 }
 
 bool isRaining() {
