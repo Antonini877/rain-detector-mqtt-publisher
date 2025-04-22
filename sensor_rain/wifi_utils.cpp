@@ -1,7 +1,7 @@
 #include <WiFi.h>
 #include "secrets.h"
 
-void wifi_connect() {
+void wifiConnect() {
   WiFi.begin(SECRET_SSID, SECRET_PASSWORD);
 
   int tries = 0;
@@ -18,4 +18,11 @@ void wifi_connect() {
   Serial.println("\nConnected to Wi-Fi!");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+}
+
+bool isWifiConnected() {
+  if (WiFi.status() != WL_CONNECTED) {
+    return false;
+  }
+  return true;
 }

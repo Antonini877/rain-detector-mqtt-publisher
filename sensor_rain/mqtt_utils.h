@@ -3,10 +3,10 @@
 
 #include <PubSubClient.h>
 
-void mqtt_setup();
-void mqtt_connect(int connectionAttempsDelay = 2000);
-void publish_message(const char* message);
-void mqtt_loop();
-bool mqtt_connected();
+void mqttSetup();
+void mqttConnect(int connectionAttempsDelay = 2000);
+void publishMessage(const char* message);
+void mqttLoop();
+bool isMqttConnected();
 
 #endif

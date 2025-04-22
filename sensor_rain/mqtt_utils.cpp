@@ -5,12 +5,12 @@
 WiFiClientSecure espClient;
 PubSubClient client(espClient);
 
-void mqtt_setup() {
+void mqttSetup() {
     espClient.setInsecure();
     client.setServer(MQTT_BROKER_URL, MQTT_BROKER_PORT);
 }
 
-void mqtt_connect(int connectionAttempsDelay = 2000) {
+void mqttConnect(int connectionAttempsDelay = 2000) {
     while (!client.connected()) {
         Serial.print("Attempting to connect to MQTT broker...");
         if (client.connect(MQTT_BROKER_CLIENT_ID, MQTT_BROKER_USERNAME, MQTT_BROKER_PASSWORD)) {
@@ -23,7 +23,7 @@ void mqtt_connect(int connectionAttempsDelay = 2000) {
     }
 }
 
-void publish_message(const char* message) {
+void publishMessage(const char* message) {
     if (client.publish(MQTT_BROKER_TOPIC, message)) {
         Serial.println("Message published successfully!");
     } else {
@@ -31,10 +31,10 @@ void publish_message(const char* message) {
     }
 }
 
-void mqtt_loop() {
+void mqttLoop() {
     client.loop();
 }
 
-bool mqtt_connected() {
+bool isMqttConnected() {
     return client.connected();
 }
