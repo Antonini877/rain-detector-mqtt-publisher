@@ -4,7 +4,7 @@
 void wifiConnect() {
   WiFi.begin(SECRET_SSID, SECRET_PASSWORD);
 
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)   {
     delay(500);
     Serial.println("Wi-Fi not connected, retrying...");
   }
